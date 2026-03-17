@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import CustomCursor from "@/components/CustomCursor";
 import MemberCarousel from "@/components/MemberCarousel";
+import SplashScreen from "@/components/SplashScreen";
 import spaceshipAirlock from "@/assets/spaceship-airlock.jpg";
 import spaceshipCorridor from "@/assets/spaceship-corridor.jpg";
 import spaceshipBridge from "@/assets/spaceship-bridge.jpg";
@@ -198,6 +199,7 @@ const SpaceshipSection = ({ section, index }: { section: Section; index: number 
 
 const Index = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -219,6 +221,7 @@ const Index = () => {
 
   return (
     <div className="relative cursor-none">
+      {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
       <CustomCursor />
       <SpaceshipNav activeIndex={activeIndex} />
       {sections.map((section, i) => (
