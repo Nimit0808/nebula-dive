@@ -141,6 +141,27 @@
   50% { transform: translateY(-10px); }
 }
 
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+@keyframes ship-enter {
+  0% { transform: translateY(120vh); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes flame-flicker {
+  0% { transform: scaleX(1) scaleY(1); }
+  100% { transform: scaleX(0.85) scaleY(1.1); }
+}
+
+@keyframes star-streak {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 0.8; }
+  100% { transform: translateY(120vh); opacity: 0; }
+}
+
 @keyframes scroll-left {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
