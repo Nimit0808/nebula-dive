@@ -224,6 +224,10 @@ const Index = () => {
       {sections.map((section, i) => (
         <SpaceshipSection key={section.id} section={section} index={i} />
       ))}
+      {/* Member carousel at the bottom */}
+      <div className="relative z-10" style={{ background: "hsl(var(--background))" }}>
+        <MemberCarousel />
+      </div>
     </div>
   );
 };
