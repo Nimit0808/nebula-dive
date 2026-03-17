@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import CustomCursor from "@/components/CustomCursor";
 import spaceshipAirlock from "@/assets/spaceship-airlock.jpg";
 import spaceshipCorridor from "@/assets/spaceship-corridor.jpg";
 import spaceshipBridge from "@/assets/spaceship-bridge.jpg";
@@ -216,7 +217,8 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative cursor-none">
+      <CustomCursor />
       <SpaceshipNav activeIndex={activeIndex} />
       {sections.map((section, i) => (
         <SpaceshipSection key={section.id} section={section} index={i} />
