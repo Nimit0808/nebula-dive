@@ -217,7 +217,8 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative cursor-none">
+      <CustomCursor />
       <SpaceshipNav activeIndex={activeIndex} />
       {sections.map((section, i) => (
         <SpaceshipSection key={section.id} section={section} index={i} />
