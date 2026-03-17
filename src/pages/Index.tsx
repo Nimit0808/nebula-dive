@@ -48,6 +48,22 @@ const sections: Section[] = [
     image: spaceshipEngine,
     depth: "DEPTH: -300M",
   },
+  {
+    id: "medbay",
+    title: "MEDICAL BAY",
+    subtitle: "DECK 09 — LIFE SUPPORT",
+    description: "Healing pods hum with bio-electric energy. Holographic diagnostics scan every cell, mending what the void breaks.",
+    image: spaceshipMedbay,
+    depth: "DEPTH: -180M",
+  },
+  {
+    id: "cargo",
+    title: "CARGO HOLD",
+    subtitle: "DECK 15 — LOWER DECKS",
+    description: "Massive crates from distant worlds fill the cavernous hold. Mechanical arms shift cargo in the purple haze.",
+    image: spaceshipCargo,
+    depth: "DEPTH: -450M",
+  },
 ];
 
 const SpaceshipNav = ({ activeIndex }: { activeIndex: number }) => (
