@@ -199,6 +199,7 @@ const SpaceshipSection = ({ section, index }: { section: Section; index: number 
 
 const Index = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -220,6 +221,7 @@ const Index = () => {
 
   return (
     <div className="relative cursor-none">
+      {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
       <CustomCursor />
       <SpaceshipNav activeIndex={activeIndex} />
       {sections.map((section, i) => (
