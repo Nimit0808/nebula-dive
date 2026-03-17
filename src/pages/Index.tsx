@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import CustomCursor from "@/components/CustomCursor";
+import MemberCarousel from "@/components/MemberCarousel";
 import spaceshipAirlock from "@/assets/spaceship-airlock.jpg";
 import spaceshipCorridor from "@/assets/spaceship-corridor.jpg";
 import spaceshipBridge from "@/assets/spaceship-bridge.jpg";
