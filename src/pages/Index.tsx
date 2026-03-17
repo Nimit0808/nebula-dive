@@ -85,8 +85,32 @@ const SpaceshipSection = ({ section, index }: { section: Section; index: number 
         }}
       />
 
-      {/* Overlay */}
-      <div className="spaceship-overlay" />
+      {/* Heavy overlay to unify colors */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(180deg,
+            hsl(var(--background)) 0%,
+            hsl(var(--background) / 0.85) 8%,
+            hsl(var(--background) / 0.55) 30%,
+            hsl(var(--background) / 0.45) 50%,
+            hsl(var(--background) / 0.55) 70%,
+            hsl(var(--background) / 0.85) 92%,
+            hsl(var(--background)) 100%
+          )`,
+        }}
+      />
+
+      {/* Purple/blue tint overlay for cohesion */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse at center,
+            hsl(270 60% 20% / 0.3) 0%,
+            hsl(240 40% 10% / 0.5) 100%
+          )`,
+        }}
+      />
 
       {/* Scan line effect */}
       <div className="absolute inset-0 scan-line pointer-events-none" />
