@@ -3,6 +3,8 @@ import spaceshipAirlock from "@/assets/spaceship-airlock.jpg";
 import spaceshipCorridor from "@/assets/spaceship-corridor.jpg";
 import spaceshipBridge from "@/assets/spaceship-bridge.jpg";
 import spaceshipEngine from "@/assets/spaceship-engine.jpg";
+import spaceshipMedbay from "@/assets/spaceship-medbay.jpg";
+import spaceshipCargo from "@/assets/spaceship-cargo.jpg";
 
 interface Section {
   id: string;
