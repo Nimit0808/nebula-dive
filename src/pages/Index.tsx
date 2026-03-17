@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import CustomCursor from "@/components/CustomCursor";
+import MemberCarousel from "@/components/MemberCarousel";
 import spaceshipAirlock from "@/assets/spaceship-airlock.jpg";
 import spaceshipCorridor from "@/assets/spaceship-corridor.jpg";
 import spaceshipBridge from "@/assets/spaceship-bridge.jpg";
@@ -223,6 +224,10 @@ const Index = () => {
       {sections.map((section, i) => (
         <SpaceshipSection key={section.id} section={section} index={i} />
       ))}
+      {/* Member carousel at the bottom */}
+      <div className="relative z-10" style={{ background: "hsl(var(--background))" }}>
+        <MemberCarousel />
+      </div>
     </div>
   );
 };
