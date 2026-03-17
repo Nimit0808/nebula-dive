@@ -1,44 +1,32 @@
 import { useEffect, useState } from "react";
+import astronautImg from "@/assets/astronaut-cursor.png";
 
 const CustomCursor = () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [trailing, setTrailing] = useState({ x: 0, y: 0 });
-  const [clicking, setClicking] = useState(false);
-  const [hovering, setHovering] = useState(false);
+  const [direction, setDirection] = useState(1); // 1 = right, -1 = left
+  const [prevX, setPrevX] = useState(0);
 
   useEffect(() => {
-    const move = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
-    const down = () => setClicking(true);
-    const up = () => setClicking(false);
-
-    const checkHover = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      setHovering(
-        target.tagName === "BUTTON" ||
-        target.tagName === "A" ||
-        target.closest("button") !== null ||
-        target.closest("a") !== null
-      );
+    const move = (e: MouseEvent) => {
+      setPos({ x: e.clientX, y: e.clientY });
+      setDirection((prev) => {
+        const newDir = e.clientX > prevX ? 1 : e.clientX < prevX ? -1 : prev;
+        setPrevX(e.clientX);
+        return newDir;
+      });
     };
 
     window.addEventListener("mousemove", move);
-    window.addEventListener("mousemove", checkHover);
-    window.addEventListener("mousedown", down);
-    window.addEventListener("mouseup", up);
-    return () => {
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mousemove", checkHover);
-      window.removeEventListener("mousedown", down);
-      window.removeEventListener("mouseup", up);
-    };
-  }, []);
+    return () => window.removeEventListener("mousemove", move);
+  }, [prevX]);
 
   useEffect(() => {
     let raf: number;
     const animate = () => {
       setTrailing((prev) => ({
-        x: prev.x + (pos.x - prev.x) * 0.15,
-        y: prev.y + (pos.y - prev.y) * 0.15,
+        x: prev.x + (pos.x - prev.x) * 0.08,
+        y: prev.y + (pos.y - prev.y) * 0.08,
       }));
       raf = requestAnimationFrame(animate);
     };
@@ -46,40 +34,45 @@ const CustomCursor = () => {
     return () => cancelAnimationFrame(raf);
   }, [pos]);
 
+  // Calculate tilt based on movement
+  const dx = pos.x - trailing.x;
+  const dy = pos.y - trailing.y;
+  const tilt = Math.min(Math.max(dy * -0.8, -20), 20);
+  const lean = Math.min(Math.max(dx * 0.5, -15), 15);
+
   return (
     <>
-      {/* Inner dot */}
+      {/* Small glow dot at actual cursor position */}
       <div
         className="pointer-events-none fixed z-[9999] mix-blend-screen"
         style={{
           left: pos.x,
           top: pos.y,
-          width: clicking ? 6 : 8,
-          height: clicking ? 6 : 8,
+          width: 6,
+          height: 6,
           borderRadius: "50%",
           background: "hsl(185 100% 60%)",
           transform: "translate(-50%, -50%)",
-          transition: "width 0.15s, height 0.15s",
-          boxShadow: "0 0 8px hsl(185 100% 60% / 0.8), 0 0 20px hsl(185 100% 60% / 0.4)",
+          boxShadow: "0 0 6px hsl(185 100% 60% / 0.8)",
         }}
       />
-      {/* Trailing ring */}
+      {/* Astronaut following cursor */}
       <div
-        className="pointer-events-none fixed z-[9998] mix-blend-screen"
+        className="pointer-events-none fixed z-[9998]"
         style={{
           left: trailing.x,
           top: trailing.y,
-          width: hovering ? 50 : clicking ? 28 : 36,
-          height: hovering ? 50 : clicking ? 28 : 36,
-          borderRadius: "50%",
-          border: `1.5px solid hsl(270 70% 65% / ${hovering ? 0.8 : 0.5})`,
-          transform: "translate(-50%, -50%)",
-          transition: "width 0.3s ease-out, height 0.3s ease-out, border 0.3s",
-          boxShadow: hovering
-            ? "0 0 15px hsl(270 70% 60% / 0.4), inset 0 0 15px hsl(270 70% 60% / 0.1)"
-            : "0 0 8px hsl(270 70% 60% / 0.2)",
+          transform: `translate(-50%, -50%) scaleX(${direction}) rotate(${tilt + lean}deg)`,
+          transition: "transform 0.1s ease-out",
         }}
-      />
+      >
+        <img
+          src={astronautImg}
+          alt=""
+          className="w-12 h-12 drop-shadow-[0_0_12px_hsl(270_70%_60%/0.6)]"
+          draggable={false}
+        />
+      </div>
     </>
   );
 };
